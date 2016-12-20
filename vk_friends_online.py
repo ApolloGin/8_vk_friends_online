@@ -21,9 +21,9 @@ def get_online_friends(login, password):
         scope='friends'
     )
     api = vk.API(session)
-    online_friends_iter = filter(
-        lambda friend: friend['online'] == 1,
-        api.friends.get(fields='first_name, last_name, online')
+    online_friends_iter = api.users.get(
+        fields='first_name, last_name, online',
+        user_ids=api.friends.getOnline()
     )
     return online_friends_iter
 
